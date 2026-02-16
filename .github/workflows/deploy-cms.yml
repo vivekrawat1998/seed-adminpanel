@@ -1,0 +1,107 @@
+name: CI/CD — Deploy Strapi CMS (v5) to EC2
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # 1. Checkout code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Setup Node.js
+      - name: Use Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      # 3. Install dependencies locally (for typechecking/plugins)
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Prepare release package (copy only source files)
+      - name: Prepare release package
+        run: |
+          rm -rf release || true
+          mkdir -p release
+
+          
+          # Copy required Strapi v5 folders (NO node_modules, NO build, NO .strapi)
+          cp -r package.json package-lock.json ecosystem.config.js \
+                src config public data types scripts release/
+
+          # Write .env safely
+          if [ -n "${{ secrets.ENV_FILE_CMS }}" ]; then
+          cat << '__ENVFILE__' > release/.env
+          ${{ secrets.ENV_FILE_CMS }}
+          __ENVFILE__
+          fi
+
+          # Fix favicon location (Strapi expects /favicon.ico)
+          if [ -f public/favicon.ico ]; then
+            cp public/favicon.ico release/
+          fi
+
+          tar -czf release-cms.tar.gz -C release .
+
+      # 5. Configure SSH
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/deploy_key_cms
+          chmod 600 ~/.ssh/deploy_key_cms
+          ssh-keyscan -p ${{ secrets.EC2_SSH_PORT }} ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+
+      # 6. Upload release package to EC2
+      - name: Upload release bundle
+        run: |
+          scp -i ~/.ssh/deploy_key_cms -P ${{ secrets.EC2_SSH_PORT }} release-cms.tar.gz \
+            ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/tmp/release-cms.tar.gz
+
+      # 7. Deploy on EC2
+      - name: Deploy on EC2
+        run: |
+          ssh -i ~/.ssh/deploy_key_cms -p ${{ secrets.EC2_SSH_PORT }} \
+          ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << '__SSH__'
+          set -euo pipefail
+
+          APP_DIR="/home/msu/cms"
+          PM2_NAME="cms"
+
+          mkdir -p "$APP_DIR"
+          rm -rf "$APP_DIR"/*
+
+          # Extract new release
+          tar -xzf /tmp/release-cms.tar.gz -C "$APP_DIR"
+          rm -f /tmp/release-cms.tar.gz
+
+          # Write .env file on EC2
+          if [ -n "${{ secrets.ENV_FILE_CMS }}" ]; then
+          cat << '__ENVFILE2__' > "$APP_DIR/.env"
+          ${{ secrets.ENV_FILE_CMS }}
+          __ENVFILE2__
+          chmod 600 "$APP_DIR/.env"
+          fi
+
+          cd "$APP_DIR"
+
+          # Install ALL dependencies (required for Strapi v5)
+          npm ci
+
+          # Build Strapi Admin UI (MUST run on EC2)
+          npm run build
+
+          # Start or restart PM2 service
+          if pm2 list | grep -q "$PM2_NAME"; then
+            pm2 restart "$PM2_NAME"
+          else
+            pm2 start ecosystem.config.js --env production --name "$PM2_NAME"
+          fi
+
+          pm2 save
+          __SSH__

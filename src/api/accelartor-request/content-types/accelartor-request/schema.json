@@ -1,0 +1,74 @@
+{
+  "kind": "collectionType",
+  "collectionName": "accelartor_requests",
+  "info": {
+    "singularName": "accelartor-request",
+    "pluralName": "accelartor-requests",
+    "displayName": "accelartor"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "Designation": {
+      "type": "string"
+    },
+    "Mobilenumber": {
+      "type": "biginteger"
+    },
+    "email": {
+      "type": "email"
+    },
+    "NameofOrganization": {
+      "type": "string"
+    },
+    "TypeofOrganization": {
+      "type": "enumeration",
+      "enum": [
+        "FPO/FPC",
+        "ICAR Institutes/Name",
+        "National Seed Organisation",
+        "State Seed Certification Agency",
+        "Private seed company",
+        "NGO",
+        "Universities/Name",
+        "State Seed Organisation",
+        "State department of Agriculture",
+        "Individual farmers",
+        "Other"
+      ]
+    },
+    "RegistrationNumber": {
+      "type": "biginteger"
+    },
+    "State": {
+      "type": "string"
+    },
+    "PurposeofParticipation": {
+      "type": "enumeration",
+      "enum": [
+        "Seed multiplication",
+        "Knowledge Sharing",
+        "Research Collaboration",
+        "Trainings",
+        "Other"
+      ]
+    },
+    "Declaration": {
+      "type": "boolean"
+    },
+    "breeder_request": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::membership-request.membership-request",
+      "inversedBy": "accelartor_requests"
+    },
+    "Approval": {
+      "type": "boolean"
+    }
+  }
+}

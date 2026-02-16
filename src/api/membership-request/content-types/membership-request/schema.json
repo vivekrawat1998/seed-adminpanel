@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "membership_requests",
+  "info": {
+    "singularName": "membership-request",
+    "pluralName": "membership-requests",
+    "displayName": "membership"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "accelartor_requests": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::accelartor-request.accelartor-request",
+      "mappedBy": "breeder_request"
+    }
+  }
+}
