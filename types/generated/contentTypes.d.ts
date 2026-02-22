@@ -386,10 +386,6 @@ export interface ApiAccelartorRequestAccelartorRequest
   };
   attributes: {
     Approval: Schema.Attribute.Boolean;
-    breeder_request: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::membership-request.membership-request'
-    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -435,6 +431,10 @@ export interface ApiAccelartorRequestAccelartorRequest
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    users_permissions_user: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
   };
 }
 
@@ -450,6 +450,8 @@ export interface ApiBreederRequestBreederRequest
     draftAndPublish: true;
   };
   attributes: {
+    admin_user: Schema.Attribute.Relation<'oneToOne', 'admin::user'>;
+    Approval: Schema.Attribute.Boolean;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -476,35 +478,38 @@ export interface ApiBreederRequestBreederRequest
   };
 }
 
-export interface ApiMembershipRequestMembershipRequest
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'membership_requests';
+export interface ApiMemberMember extends Struct.CollectionTypeSchema {
+  collectionName: 'members';
   info: {
-    displayName: 'membership';
-    pluralName: 'membership-requests';
-    singularName: 'membership-request';
+    displayName: 'member';
+    pluralName: 'members';
+    singularName: 'member';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    accelartor_requests: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::accelartor-request.accelartor-request'
-    >;
+    Approval: Schema.Attribute.Boolean;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    email: Schema.Attribute.Email;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::membership-request.membership-request'
+      'api::member.member'
     > &
       Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    Organization: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    users_permissions_user: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
   };
 }
 
@@ -1072,6 +1077,11 @@ export interface PluginUsersPermissionsUser
     draftAndPublish: false;
   };
   attributes: {
+    accelartors: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::accelartor-request.accelartor-request'
+    >;
+    Approval: Schema.Attribute.Boolean;
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     breeders: Schema.Attribute.Relation<
       'oneToMany',
@@ -1093,6 +1103,7 @@ export interface PluginUsersPermissionsUser
       'plugin::users-permissions.user'
     > &
       Schema.Attribute.Private;
+    members: Schema.Attribute.Relation<'oneToMany', 'api::member.member'>;
     password: Schema.Attribute.Password &
       Schema.Attribute.Private &
       Schema.Attribute.SetMinMaxLength<{
@@ -1129,7 +1140,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::accelartor-request.accelartor-request': ApiAccelartorRequestAccelartorRequest;
       'api::breeder-request.breeder-request': ApiBreederRequestBreederRequest;
-      'api::membership-request.membership-request': ApiMembershipRequestMembershipRequest;
+      'api::member.member': ApiMemberMember;
       'plugin::audit-logs.log': PluginAuditLogsLog;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

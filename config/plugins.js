@@ -1,5 +1,14 @@
 
 module.exports = ({ env }) => ({
+  "users-permissions": {
+    config: {
+      resetPassword: {
+        redirectUrl: "http://localhost:5173/reset-password", // your React route
+      },
+    },
+  },
+
+
   upload: {
     config: {
       provider: '@strapi/provider-upload-aws-s3',

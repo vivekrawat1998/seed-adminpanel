@@ -61,14 +61,14 @@
     "Declaration": {
       "type": "boolean"
     },
-    "breeder_request": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::membership-request.membership-request",
-      "inversedBy": "accelartor_requests"
-    },
     "Approval": {
       "type": "boolean"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "accelartors"
     }
   }
 }

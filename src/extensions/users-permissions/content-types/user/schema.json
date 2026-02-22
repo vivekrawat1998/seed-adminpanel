@@ -66,10 +66,25 @@
       "inversedBy": "users",
       "configurable": false
     },
+    "Approval": {
+      "type": "boolean"
+    },
+    "accelartors": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::accelartor-request.accelartor-request",
+      "mappedBy": "users_permissions_user"
+    },
     "breeders": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::breeder-request.breeder-request",
+      "mappedBy": "users_permissions_user"
+    },
+    "members": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::member.member",
       "mappedBy": "users_permissions_user"
     }
   }
