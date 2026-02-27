@@ -86,6 +86,12 @@
       "relation": "oneToMany",
       "target": "api::member.member",
       "mappedBy": "users_permissions_user"
+    },
+    "download_logs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::download-log.download-log",
+      "mappedBy": "users_permissions_user"
     }
   }
 }

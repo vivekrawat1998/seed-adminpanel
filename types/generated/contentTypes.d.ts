@@ -478,6 +478,80 @@ export interface ApiBreederRequestBreederRequest
   };
 }
 
+export interface ApiContactUsContactUs extends Struct.CollectionTypeSchema {
+  collectionName: 'contact_uses';
+  info: {
+    displayName: 'contact-us';
+    pluralName: 'contact-uses';
+    singularName: 'contact-us';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    category: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Email: Schema.Attribute.Email;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::contact-us.contact-us'
+    > &
+      Schema.Attribute.Private;
+    Message: Schema.Attribute.Text;
+    Name: Schema.Attribute.String;
+    phoneNumber: Schema.Attribute.BigInteger;
+    publishedAt: Schema.Attribute.DateTime;
+    Subject: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiDownloadLogDownloadLog extends Struct.CollectionTypeSchema {
+  collectionName: 'download_logs';
+  info: {
+    displayName: 'download-log';
+    pluralName: 'download-logs';
+    singularName: 'download-log';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    category: Schema.Attribute.Enumeration<
+      ['report', 'dataset', 'image', 'pdf ', 'excel']
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    downloadUrl: Schema.Attribute.String;
+    fileName: Schema.Attribute.String;
+    filePath: Schema.Attribute.String;
+    fileSize: Schema.Attribute.BigInteger;
+    fileTitle: Schema.Attribute.String;
+    ipAddress: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::download-log.download-log'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    userAgent: Schema.Attribute.String;
+    users_permissions_user: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+  };
+}
+
 export interface ApiMemberMember extends Struct.CollectionTypeSchema {
   collectionName: 'members';
   info: {
@@ -1092,6 +1166,10 @@ export interface PluginUsersPermissionsUser
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    download_logs: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::download-log.download-log'
+    >;
     email: Schema.Attribute.Email &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
@@ -1140,6 +1218,8 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::accelartor-request.accelartor-request': ApiAccelartorRequestAccelartorRequest;
       'api::breeder-request.breeder-request': ApiBreederRequestBreederRequest;
+      'api::contact-us.contact-us': ApiContactUsContactUs;
+      'api::download-log.download-log': ApiDownloadLogDownloadLog;
       'api::member.member': ApiMemberMember;
       'plugin::audit-logs.log': PluginAuditLogsLog;
       'plugin::content-releases.release': PluginContentReleasesRelease;

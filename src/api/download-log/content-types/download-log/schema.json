@@ -1,0 +1,52 @@
+{
+  "kind": "collectionType",
+  "collectionName": "download_logs",
+  "info": {
+    "singularName": "download-log",
+    "pluralName": "download-logs",
+    "displayName": "download-log"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "download_logs"
+    },
+    "fileName": {
+      "type": "string"
+    },
+    "fileTitle": {
+      "type": "string"
+    },
+    "filePath": {
+      "type": "string"
+    },
+    "fileSize": {
+      "type": "biginteger"
+    },
+    "downloadUrl": {
+      "type": "string"
+    },
+    "ipAddress": {
+      "type": "string"
+    },
+    "userAgent": {
+      "type": "string"
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "report",
+        "dataset",
+        "image",
+        "pdf ",
+        "excel"
+      ]
+    }
+  }
+}

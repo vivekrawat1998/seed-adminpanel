@@ -2,27 +2,56 @@
 module.exports = ({ env }) => ({
   "users-permissions": {
     config: {
-      resetPassword: {
-        redirectUrl: "http://localhost:5173/reset-password", // your React route
+      email: {
+        reset_password: {
+          options: {
+            redirectUrl: "http://localhost:5173/reset-password",
+          },
+        },
+      },
+      jwt: {
+        expiresIn: '7d',
+      },
+      // ✅ CRITICAL: Enable public forgot-password endpoint
+      forgotPassword: {
+        enabled: true,
       },
     },
   },
+
+
+  // upload: {
+  //   config: {
+  //     provider: '@strapi/provider-upload-aws-s3',
+  //     providerOptions: {
+  //       s3Options: {
+  //         accessKeyId: env('AWS_ACCESS_KEY_ID'),
+  //         secretAccessKey: env('AWS_SECRET_ACCESS_KEY'),
+  //         region: env('AWS_REGION'),
+  //         params: {
+  //           Bucket: env('AWS_BUCKET_NAME'),
+  //         },
+  //       },
+  //     },
+  //     defaultDepth: 5,
+  //     actionOptions: {
+  //       upload: {},
+  //       uploadStream: {},
+  //       delete: {},
+  //     },
+  //   },
+  // },
 
 
   upload: {
     config: {
       provider: '@strapi/provider-upload-aws-s3',
       providerOptions: {
-        s3Options: {
-          accessKeyId: env('AWS_ACCESS_KEY_ID'),
-          secretAccessKey: env('AWS_SECRET_ACCESS_KEY'),
-          region: env('AWS_REGION'),
-          params: {
-            Bucket: env('AWS_BUCKET_NAME'),
-          },
+        region: env('AWS_REGION'),
+        params: {
+          Bucket: env('AWS_BUCKET_NAME'),
         },
       },
-      defaultDepth: 5,
       actionOptions: {
         upload: {},
         uploadStream: {},
