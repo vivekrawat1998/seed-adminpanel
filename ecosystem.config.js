@@ -1,14 +1,13 @@
 module.exports = {
-  apps: [
-    {
-      name: "cms",
-      script: "npm",
-      args: "start",
-      cwd: "/home/msu/cms",
-      env: {
-        NODE_ENV: "production",
-        PORT: 1337
-      }
+  apps: [{
+    name: 'strapi-backend',
+    script: 'npm',
+    args: 'start',
+    cwd: '/var/www/backend',
+    env: {
+      HOST: '0.0.0.0',
+      PORT: 1337,
+      NODE_ENV: 'production'
     }
-  ]
+  }]
 };
