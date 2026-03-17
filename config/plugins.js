@@ -60,29 +60,29 @@ module.exports = ({ env }) => ({
   //   },
   // },
   // Add the HTML sanitizer configuration for rich text editor
-  'content-manager': {
-    config: {
-      contentTypes: {
-        'api::article.article': { // Your content type
-          attributes: {
-            blocks: { // Dynamic Zone field name
-              components: {
-                'shared.rich-text': { // Component name within Dynamic Zone
-                  sanitization: {
-                    allowedTags: ['div', 'span', 'p', 'a', 'strong', 'em', 'ul', 'li', 'ol', 'br'], // Tags you want to allow
-                    allowedAttributes: {
-                      '*': ['class', 'id', 'style'], // Allow class, id, style attributes
-                      'a': ['href', 'target', 'rel'], // Allow specific attributes for <a> tags
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
-      },
-    },
-  },
+  // 'content-manager': {
+  //   config: {
+  //     contentTypes: {
+  //       'api::article.article': { // Your content type
+  //         attributes: {
+  //           blocks: { // Dynamic Zone field name
+  //             components: {
+  //               'shared.rich-text': { // Component name within Dynamic Zone
+  //                 sanitization: {
+  //                   allowedTags: ['div', 'span', 'p', 'a', 'strong', 'em', 'ul', 'li', 'ol', 'br'], // Tags you want to allow
+  //                   allowedAttributes: {
+  //                     '*': ['class', 'id', 'style'], // Allow class, id, style attributes
+  //                     'a': ['href', 'target', 'rel'], // Allow specific attributes for <a> tags
+  //                   },
+  //                 },
+  //               },
+  //             },
+  //           },
+  //         },
+  //       },
+  //     },
+  //   },
+  // },
   'tree-menus': {
     config: {
       fieldSchema: {
