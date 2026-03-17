@@ -552,6 +552,38 @@ export interface ApiDownloadLogDownloadLog extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiMapdataMapdata extends Struct.CollectionTypeSchema {
+  collectionName: 'mapdatas';
+  info: {
+    displayName: 'mapdata';
+    pluralName: 'mapdatas';
+    singularName: 'mapdata';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    activityType: Schema.Attribute.String;
+    count: Schema.Attribute.BigInteger;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::mapdata.mapdata'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    quantity: Schema.Attribute.BigInteger;
+    state: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    year: Schema.Attribute.BigInteger;
+  };
+}
+
 export interface ApiMemberMember extends Struct.CollectionTypeSchema {
   collectionName: 'members';
   info: {
@@ -875,62 +907,6 @@ export interface PluginReviewWorkflowsWorkflowStage
   };
 }
 
-export interface PluginTreeMenusMenu extends Struct.CollectionTypeSchema {
-  collectionName: 'menus';
-  info: {
-    description: '';
-    displayName: 'Menu';
-    name: 'Menu';
-    pluralName: 'menus';
-    singularName: 'menu';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: true;
-    };
-    'content-type-builder': {
-      visible: true;
-    };
-    i18n: {
-      localized: true;
-    };
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'plugin::tree-menus.menu'
-    >;
-    publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.UID<'title'> &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    title: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: false;
-        };
-      }> &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 100;
-      }>;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Struct.CollectionTypeSchema {
   collectionName: 'files';
   info: {
@@ -1220,6 +1196,7 @@ declare module '@strapi/strapi' {
       'api::breeder-request.breeder-request': ApiBreederRequestBreederRequest;
       'api::contact-us.contact-us': ApiContactUsContactUs;
       'api::download-log.download-log': ApiDownloadLogDownloadLog;
+      'api::mapdata.mapdata': ApiMapdataMapdata;
       'api::member.member': ApiMemberMember;
       'plugin::audit-logs.log': PluginAuditLogsLog;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -1227,7 +1204,6 @@ declare module '@strapi/strapi' {
       'plugin::i18n.locale': PluginI18NLocale;
       'plugin::review-workflows.workflow': PluginReviewWorkflowsWorkflow;
       'plugin::review-workflows.workflow-stage': PluginReviewWorkflowsWorkflowStage;
-      'plugin::tree-menus.menu': PluginTreeMenusMenu;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;

@@ -20,38 +20,20 @@ module.exports = ({ env }) => ({
   },
 
 
-  // upload: {
-  //   config: {
-  //     provider: '@strapi/provider-upload-aws-s3',
-  //     providerOptions: {
-  //       s3Options: {
-  //         accessKeyId: env('AWS_ACCESS_KEY_ID'),
-  //         secretAccessKey: env('AWS_SECRET_ACCESS_KEY'),
-  //         region: env('AWS_REGION'),
-  //         params: {
-  //           Bucket: env('AWS_BUCKET_NAME'),
-  //         },
-  //       },
-  //     },
-  //     defaultDepth: 5,
-  //     actionOptions: {
-  //       upload: {},
-  //       uploadStream: {},
-  //       delete: {},
-  //     },
-  //   },
-  // },
-
-
   upload: {
     config: {
       provider: '@strapi/provider-upload-aws-s3',
       providerOptions: {
-        region: env('AWS_REGION'),
-        params: {
-          Bucket: env('AWS_BUCKET_NAME'),
+        s3Options: {
+          accessKeyId: env('AWS_ACCESS_KEY_ID'),
+          secretAccessKey: env('AWS_SECRET_ACCESS_KEY'),
+          region: env('AWS_REGION'),
+          params: {
+            Bucket: env('AWS_BUCKET_NAME'),
+          },
         },
       },
+      defaultDepth: 5,
       actionOptions: {
         upload: {},
         uploadStream: {},
@@ -59,6 +41,24 @@ module.exports = ({ env }) => ({
       },
     },
   },
+
+
+  // upload: {
+  //   config: {
+  //     provider: '@strapi/provider-upload-aws-s3',
+  //     providerOptions: {
+  //       region: env('AWS_REGION'),
+  //       params: {
+  //         Bucket: env('AWS_BUCKET_NAME'),
+  //       },
+  //     },
+  //     actionOptions: {
+  //       upload: {},
+  //       uploadStream: {},
+  //       delete: {},
+  //     },
+  //   },
+  // },
   // Add the HTML sanitizer configuration for rich text editor
   'content-manager': {
     config: {

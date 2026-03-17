@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "mapdatas",
+  "info": {
+    "singularName": "mapdata",
+    "pluralName": "mapdatas",
+    "displayName": "mapdata"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "state": {
+      "type": "string"
+    },
+    "year": {
+      "type": "biginteger"
+    },
+    "activityType": {
+      "type": "string"
+    },
+    "quantity": {
+      "type": "biginteger"
+    },
+    "count": {
+      "type": "biginteger"
+    }
+  }
+}

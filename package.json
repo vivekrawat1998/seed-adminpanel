@@ -32,11 +32,10 @@
     "react-router-dom": "^6.0.0",
     "strapi-google-analytics-dashboard": "^0.0.2",
     "strapi-plugin-audit-logs": "^2.0.3",
-    "strapi-plugin-dashboard": "^1.0.2",
+    "strapi-plugin-dashboard": "^1.0.2", 
     "strapi-plugin-populate-deep": "^3.0.1",
     "strapi-plugin-tagsinput": "^2.0.3",
-    "styled-components": "^6.0.0",
-    "tree-menus": "^1.0.4"
+    "styled-components": "^6.0.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.12",
