@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "graphdatas",
+  "info": {
+    "singularName": "graphdata",
+    "pluralName": "graphdatas",
+    "displayName": "graphdata"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "data": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

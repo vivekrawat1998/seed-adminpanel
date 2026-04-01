@@ -552,6 +552,37 @@ export interface ApiDownloadLogDownloadLog extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiGraphdataGraphdata extends Struct.CollectionTypeSchema {
+  collectionName: 'graphdatas';
+  info: {
+    displayName: 'graphdata';
+    pluralName: 'graphdatas';
+    singularName: 'graphdata';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    data: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::graphdata.graphdata'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiMapdataMapdata extends Struct.CollectionTypeSchema {
   collectionName: 'mapdatas';
   info: {
@@ -563,24 +594,25 @@ export interface ApiMapdataMapdata extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    activityType: Schema.Attribute.String;
-    count: Schema.Attribute.BigInteger;
+    breederSeeds: Schema.Attribute.BigInteger;
+    clusterDemo: Schema.Attribute.BigInteger;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    endyear: Schema.Attribute.BigInteger;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::mapdata.mapdata'
     > &
       Schema.Attribute.Private;
+    minikitDemo: Schema.Attribute.BigInteger;
     publishedAt: Schema.Attribute.DateTime;
-    quantity: Schema.Attribute.BigInteger;
+    startyear: Schema.Attribute.BigInteger;
     state: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    year: Schema.Attribute.BigInteger;
   };
 }
 
@@ -1196,6 +1228,7 @@ declare module '@strapi/strapi' {
       'api::breeder-request.breeder-request': ApiBreederRequestBreederRequest;
       'api::contact-us.contact-us': ApiContactUsContactUs;
       'api::download-log.download-log': ApiDownloadLogDownloadLog;
+      'api::graphdata.graphdata': ApiGraphdataGraphdata;
       'api::mapdata.mapdata': ApiMapdataMapdata;
       'api::member.member': ApiMemberMember;
       'plugin::audit-logs.log': PluginAuditLogsLog;

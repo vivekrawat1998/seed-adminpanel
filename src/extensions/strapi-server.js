@@ -27,7 +27,7 @@ module.exports = (plugin) => {
 
         // ⭐ Update user AFTER created
         if (ctx.body?.user) {
-
+             
             const userId = ctx.body.user.id;
 
             await strapi.entityService.update(

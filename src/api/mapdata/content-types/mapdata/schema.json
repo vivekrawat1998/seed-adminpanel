@@ -14,16 +14,19 @@
     "state": {
       "type": "string"
     },
-    "year": {
+    "startyear": {
       "type": "biginteger"
     },
-    "activityType": {
-      "type": "string"
-    },
-    "quantity": {
+    "breederSeeds": {
       "type": "biginteger"
     },
-    "count": {
+    "clusterDemo": {
+      "type": "biginteger"
+    },
+    "minikitDemo": {
+      "type": "biginteger"
+    },
+    "endyear": {
       "type": "biginteger"
     }
   }
