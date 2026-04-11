@@ -19,4 +19,7 @@ module.exports = ({ env }) => ({
   },
   url: 'admin',
   serveAdminPanel: true,
+  preview: {
+    enabled: false,
+  },
 });

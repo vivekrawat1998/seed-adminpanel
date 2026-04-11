@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_shared_nominated_varieties",
+  "info": {
+    "displayName": "nominated variety"
+  },
+  "options": {},
+  "attributes": {
+    "variety": {
+      "type": "component",
+      "component": "shared.variety",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

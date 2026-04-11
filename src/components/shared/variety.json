@@ -1,0 +1,40 @@
+{
+  "collectionName": "components_shared_varieties",
+  "info": {
+    "displayName": "variety"
+  },
+  "options": {},
+  "attributes": {
+    "variety": {
+      "type": "string"
+    },
+    "Duration": {
+      "type": "biginteger"
+    },
+    "Ecosystem": {
+      "type": "string"
+    },
+    "MarketSegment": {
+      "type": "string"
+    },
+    "GrainShape": {
+      "type": "biginteger"
+    },
+    "PotentialYields": {
+      "type": "biginteger"
+    },
+    "Bsavailability": {
+      "type": "biginteger"
+    },
+    "Seedavailability": {
+      "type": "biginteger"
+    },
+    "StatetRecommended": {
+      "type": "string"
+    },
+    "SpecialTrait": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

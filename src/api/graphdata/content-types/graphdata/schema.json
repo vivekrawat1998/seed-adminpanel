@@ -20,6 +20,21 @@
         "videos",
         "audios"
       ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "parseddata": {
+      "type": "json",
+      "default": []
+    },
+    "graphtype": {
+      "type": "enumeration",
+      "enum": [
+        "line ",
+        "bar ",
+        "pie"
+      ]
     }
   }
 }
