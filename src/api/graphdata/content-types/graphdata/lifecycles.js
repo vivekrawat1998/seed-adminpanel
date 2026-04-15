@@ -52,7 +52,7 @@ module.exports = {
 
             const workbook = XLSX.readFile(filePath);
             const sheet = workbook.Sheets[workbook.SheetNames[0]];
-            const jsonData = XLSX.utils.sheet_to_json(sheet).slice(0, 200);
+            const jsonData = XLSX.utils.sheet_to_json(sheet).slice(0, 500);
 
             console.log("📊 PARSED ROWS:", jsonData.length);
 
