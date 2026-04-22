@@ -67,7 +67,7 @@ function getFileSizeInBytes(filePath) {
 }
 
 function getFileData(fileName) {
-  const filePath = path.join('data', 'uploads', fileName);
+  const filePath = path.join(process.cwd(), 'public', 'uploads', fileName);
   // Parse the file metadata
   const size = getFileSizeInBytes(filePath);
   const ext = fileName.split('.').pop();

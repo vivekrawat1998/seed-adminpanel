@@ -76,7 +76,11 @@ module.exports = [
   {
     name: 'strapi::cors',
     config: {
-      origin: [process.env.CLIENT_SERVER],
+      origin: [
+        process.env.CLIENT_SERVER,      // Frontend domain ✅
+        process.env.PUBLIC_URL,         // Strapi's own domain ✅ (NEW)
+        'https://sanseed.org',   // Hardcoded fallback ✅ (NEW)
+      ].filter(Boolean),
       methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
       headers: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
       keepHeaderOnError: true,
