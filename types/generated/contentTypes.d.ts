@@ -401,6 +401,10 @@ export interface ApiAccelartorRequestAccelartorRequest
     Mobilenumber: Schema.Attribute.BigInteger;
     name: Schema.Attribute.String;
     NameofOrganization: Schema.Attribute.String;
+    nominatedvariety: Schema.Attribute.Component<
+      'shared.nominatedvariety',
+      false
+    >;
     publishedAt: Schema.Attribute.DateTime;
     PurposeofParticipation: Schema.Attribute.Enumeration<
       [

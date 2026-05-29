@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_shared_nominatedvarieties",
+  "info": {
+    "displayName": "nominatedvariety"
+  },
+  "options": {},
+  "attributes": {
+    "accelaratorvariety": {
+      "type": "component",
+      "component": "shared.accelarator-variety",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

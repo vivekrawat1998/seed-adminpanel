@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_shared_accelarator_varieties",
+  "info": {
+    "displayName": "AccelaratorVariety"
+  },
+  "options": {},
+  "attributes": {
+    "VarietyName": {
+      "type": "string"
+    },
+    "Typeofseedrequired": {
+      "type": "enumeration",
+      "enum": [
+        "Breederseed",
+        "Foundationseed",
+        "CertifiedSeed",
+        "others"
+      ]
+    },
+    "quantityinkg": {
+      "type": "biginteger"
+    },
+    "PurposeMode": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
