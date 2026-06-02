@@ -18,7 +18,7 @@
       "type": "string"
     },
     "GrainShape": {
-      "type": "biginteger"
+      "type": "string"
     },
     "PotentialYields": {
       "type": "biginteger"

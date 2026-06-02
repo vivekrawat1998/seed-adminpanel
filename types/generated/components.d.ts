@@ -55,7 +55,7 @@ export interface SharedVariety extends Struct.ComponentSchema {
     Bsavailability: Schema.Attribute.BigInteger;
     Duration: Schema.Attribute.BigInteger;
     Ecosystem: Schema.Attribute.String;
-    GrainShape: Schema.Attribute.BigInteger;
+    GrainShape: Schema.Attribute.String;
     MarketSegment: Schema.Attribute.String;
     PotentialYields: Schema.Attribute.BigInteger;
     Seedavailability: Schema.Attribute.BigInteger;
